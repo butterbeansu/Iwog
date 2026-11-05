@@ -188,6 +188,30 @@
       font-size: 12px;
       color: #b58c94;
     }
+    .sticker-background {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+    }
+
+    .floating-sticker {
+        position: absolute;
+        width: var(--size);
+        opacity: 0.35;
+        animation: slideSticker var(--duration) linear infinite;
+        animation-delay: var(--delay);
+    }
+
+    @keyframes slideSticker {
+        from {
+            transform: translateX(110vw) rotate(0deg);
+        }
+        to {
+            transform: translateX(-150px) rotate(360deg);
+        }
+    }
 
     @keyframes appear {
       from {
@@ -223,6 +247,7 @@
 
 <body>
 
+  <div class="sticker-background" id="stickerBackground"></div>
   <main class="container">
     <h1>For My Iwog ♡</h1>
     <p class="subtitle">A little something made just for you.</p>
@@ -360,6 +385,33 @@
     song.addEventListener("play", () => {
       playButton.textContent = "♫ Music is playing";
     });
+
+    const stickerImages = [
+      "stickers/troll-1.png",
+      "stickers/troll-2.png",
+      "stickers/wacky-1.png",
+      "stickers/wacky-2.png",
+      "stickers/funny-1.png"
+  ];
+
+  const background = document.getElementById("stickerBackground");
+
+  for (let i = 0; i < 10; i++) {
+      const sticker = document.createElement("img");
+
+      sticker.src = stickerImages[
+          Math.floor(Math.random() * stickerImages.length)
+      ];
+
+      sticker.className = "floating-sticker";
+
+      sticker.style.top = Math.random() * 90 + "%";
+      sticker.style.setProperty("--size", (40 + Math.random() * 45) + "px");
+      sticker.style.setProperty("--duration", (12 + Math.random() * 18) + "s");
+      sticker.style.setProperty("--delay", (-Math.random() * 25) + "s");
+
+      background.appendChild(sticker);
+  }
   </script>
 
 </body>
