@@ -356,7 +356,7 @@
       </button>
     </div>
 
-    <p class="footer">Made with love, just for you ♡</p>
+    <p class="footer">Made with love, just for my iwog ♡</p>
   </main>
 
   <audio id="ourSong" src="music/palagi.mp3" loop preload="auto"></audio>
@@ -369,6 +369,7 @@
     const tapHint = document.getElementById("tapHint");
     const musicBox = document.getElementById("musicBox");
     const song = document.getElementById("ourSong");
+    song.volume = 0.2;
     const playButton = document.getElementById("playButton");
 
     function openLetter() {
@@ -395,6 +396,7 @@
           playButton.textContent = "▶ Tap to play our song";
         });
     }
+    
 
     song.addEventListener("pause", () => {
       if (!song.ended) {
@@ -414,6 +416,8 @@
       "stickers/iwog 4.png",
       "stickers/iwog 5.png"
     ];
+
+    
 
     const background = document.getElementById("stickerBackground");
 
