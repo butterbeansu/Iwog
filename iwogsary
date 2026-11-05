@@ -1,0 +1,366 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For My Iwog ♡</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Georgia, serif;
+      background: linear-gradient(135deg, #fff1f2, #fce7f3, #fff7ed);
+      color: #754b53;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 24px 16px;
+      overflow-x: hidden;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 520px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 30px;
+      font-weight: normal;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: #a47780;
+      margin-bottom: 42px;
+    }
+
+    /* Envelope */
+    .envelope-wrapper {
+      display: flex;
+      justify-content: center;
+      margin: 50px 0;
+      perspective: 1000px;
+    }
+
+    .envelope {
+      position: relative;
+      width: 280px;
+      height: 180px;
+      background: #e9aeb8;
+      border-radius: 5px;
+      cursor: pointer;
+      box-shadow: 0 12px 30px rgba(130, 75, 85, 0.18);
+      transition: transform 0.3s ease;
+    }
+
+    .envelope:hover {
+      transform: translateY(-5px);
+    }
+
+    .envelope::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: #f4c6cd;
+      clip-path: polygon(0 0, 50% 58%, 100% 0);
+      transform-origin: top;
+      transition: transform 0.7s ease;
+      z-index: 3;
+    }
+
+    .envelope.open::before {
+      transform: rotateX(180deg);
+    }
+
+    .envelope::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: #df9da9;
+      clip-path: polygon(0 100%, 50% 48%, 100% 100%);
+      z-index: 2;
+    }
+
+    .seal {
+      position: absolute;
+      z-index: 4;
+      top: 65px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: #bd687b;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 21px;
+      transition: opacity 0.3s ease;
+    }
+
+    .envelope.open .seal {
+      opacity: 0;
+    }
+
+    .tap-hint {
+      font-size: 14px;
+      color: #a47780;
+      margin-top: -20px;
+    }
+
+    /* Letter */
+    .letter {
+      display: none;
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid #f4d9dd;
+      border-radius: 14px;
+      padding: 28px 23px;
+      text-align: left;
+      line-height: 1.8;
+      box-shadow: 0 12px 35px rgba(130, 75, 85, 0.10);
+      animation: appear 1s ease forwards;
+    }
+
+    .letter.show {
+      display: block;
+    }
+
+    .letter h2 {
+      text-align: center;
+      font-weight: normal;
+      color: #b66c7c;
+      font-size: 23px;
+      margin-top: 0;
+      margin-bottom: 24px;
+    }
+
+    .letter p {
+      font-size: 15px;
+      margin-bottom: 18px;
+    }
+
+    .signature {
+      text-align: right;
+      margin-top: 28px;
+      color: #b66c7c;
+    }
+
+    /* Music */
+    .music-box {
+      display: none;
+      margin-top: 22px;
+      padding: 15px;
+      background: rgba(255,255,255,0.7);
+      border-radius: 12px;
+      font-size: 13px;
+    }
+
+    .music-box.show {
+      display: block;
+    }
+
+    .music-button {
+      border: none;
+      background: #d98c9d;
+      color: white;
+      border-radius: 25px;
+      padding: 10px 20px;
+      font-size: 14px;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+
+    .music-button:hover {
+      background: #c7798b;
+    }
+
+    .footer {
+      margin-top: 30px;
+      font-size: 12px;
+      color: #b58c94;
+    }
+
+    @keyframes appear {
+      from {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 400px) {
+      h1 {
+        font-size: 26px;
+      }
+
+      .envelope {
+        width: 250px;
+        height: 160px;
+      }
+
+      .seal {
+        top: 58px;
+      }
+
+      .letter {
+        padding: 23px 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="container">
+    <h1>For My Iwog ♡</h1>
+    <p class="subtitle">A little something made just for you.</p>
+
+    <div class="envelope-wrapper" id="envelopeWrapper">
+      <div class="envelope" id="envelope" onclick="openLetter()">
+        <div class="seal">♡</div>
+      </div>
+    </div>
+
+    <p class="tap-hint" id="tapHint">Tap the envelope to open your letter 💌</p>
+
+    <article class="letter" id="letter">
+      <h2>Happy 5th Monthsary, iwog ko! 😘❤️</h2>
+
+      <p>
+        Happy 5th monthsary, my Iwog! I'm really grateful na nandito ka
+        sa tabi ko, even through the challenges and little misunderstandings
+        we've had along the way.
+      </p>
+
+      <p>
+        Thank you for staying, for understanding me, and for being patient
+        with me. Alam kong may mga pagkakataong hindi tayo nagkakaintindihan,
+        tho ako ang madalas HAHAHA 😅
+      </p>
+
+      <p>
+        Alam kong marami akong nagawang hindi tama, lalo na sa mga nasabi ko
+        sa'yo nitong mga nakaraang araw. Alam kong mali iyon, and I'm truly
+        sorry, iwog.
+      </p>
+
+      <p>
+        Alam kong may mga pagkakataong hinayaan kong manaig ang emotions ko
+        at may mga nasabi akong nakasakit sa'yo. Ayokong maramdaman mong
+        kailangan mong patunayan palagi ang pagmamahal mo sa akin, lalo na
+        kapag may mga pagkakataong hindi tayo nagkakaintindihan.
+        Patuloy akong matututo at magsisikap na maging mas mabuting partner
+        para sa'yo.
+      </p>
+
+      <p>
+        I appreciate all the little things you do, your efforts, and the
+        ways you show your love. Kahit simpleng gestures lang, they mean
+        a lot to me. I hope you know how much I appreciate you.
+      </p>
+
+      <p>
+        At ngayong nalalapit na ang panibagong taon, sana mas marami pa
+        tayong magandang experiences na pagsaluhan. Marami pa tayong
+        pagdaanan, matutunan, at ma-achieve nang magkasama.
+      </p>
+
+      <p>
+        More travels and adventures pa sana with you, iwog ko! Gusto ko
+        pang makapunta tayo sa maraming lugar at makagawa ng mas marami
+        pang memories together. Lalo na ngayon na may gantimpala na rin
+        tayo kay Tita HAHAHAHA.
+      </p>
+
+      <p>
+        I hope we continue to grow together, understand each other better,
+        and keep choosing one another through everything.
+      </p>
+
+      <p>
+        Lagi mong tatandaan, iwog ko, mahal na mahal kita. Thank you for
+        being here and for being my person. Happy 5th monthsary ulit,
+        my Iwog! 😘❤️
+      </p>
+
+      <p class="signature">
+        Always yours,<br>
+        Your Iwog ❤️
+      </p>
+    </article>
+
+    <div class="music-box" id="musicBox">
+      <div>🎵 A little song for you</div>
+      <button class="music-button" id="playButton" onclick="playMusic()">
+        ▶ Play our song
+      </button>
+    </div>
+
+    <p class="footer">Made with love, just for you ♡</p>
+  </main>
+
+  <audio id="ourSong" src="music/our-song.mp3" loop preload="auto"></audio>
+
+  <script>
+    let opened = false;
+
+    const envelope = document.getElementById("envelope");
+    const letter = document.getElementById("letter");
+    const tapHint = document.getElementById("tapHint");
+    const musicBox = document.getElementById("musicBox");
+    const song = document.getElementById("ourSong");
+    const playButton = document.getElementById("playButton");
+
+    function openLetter() {
+      if (opened) return;
+      opened = true;
+
+      envelope.classList.add("open");
+      tapHint.style.display = "none";
+
+      // Reveal the letter
+      setTimeout(() => {
+        document.getElementById("envelopeWrapper").style.display = "none";
+        letter.classList.add("show");
+        musicBox.classList.add("show");
+
+        // Attempt music playback from the envelope tap
+        playMusic();
+      }, 650);
+    }
+
+    function playMusic() {
+      song.play()
+        .then(() => {
+          playButton.textContent = "♫ Music is playing";
+        })
+        .catch(() => {
+          playButton.textContent = "▶ Tap to play our song";
+        });
+    }
+
+    song.addEventListener("pause", () => {
+      if (!song.ended) {
+        playButton.textContent = "▶ Play our song";
+      }
+    });
+
+    song.addEventListener("play", () => {
+      playButton.textContent = "♫ Music is playing";
+    });
+  </script>
+
+</body>
+</html>
