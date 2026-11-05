@@ -15,25 +15,37 @@
       margin: 0;
       min-height: 100vh;
       font-family: Georgia, serif;
-      background: linear-gradient(135deg, #fff1f2, #fce7f3, #fff7ed);
+      background: linear-gradient(135deg, #fff9df, #fff1e6, #fce7f3, #fff8d9);
+      background-size: 300% 300%;
+      animation: backgroundGlow 15s ease infinite;
       color: #754b53;
       display: flex;
       justify-content: center;
       align-items: center;
       padding: 24px 16px;
       overflow-x: hidden;
+      position: relative;
+    }
+
+    @keyframes backgroundGlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     .container {
       width: 100%;
       max-width: 520px;
       text-align: center;
+      position: relative;
+      z-index: 1;
     }
 
     h1 {
       font-size: 30px;
       font-weight: normal;
       margin-bottom: 10px;
+      color: #9b6a40;
     }
 
     .subtitle {
@@ -54,10 +66,10 @@
       position: relative;
       width: 280px;
       height: 180px;
-      background: #e9aeb8;
+      background: #f4d77e;
       border-radius: 5px;
       cursor: pointer;
-      box-shadow: 0 12px 30px rgba(130, 75, 85, 0.18);
+      box-shadow: 0 12px 30px rgba(160, 125, 65, 0.20);
       transition: transform 0.3s ease;
     }
 
@@ -69,7 +81,7 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: #f4c6cd;
+      background: #ffe9a6;
       clip-path: polygon(0 0, 50% 58%, 100% 0);
       transform-origin: top;
       transition: transform 0.7s ease;
@@ -84,7 +96,7 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: #df9da9;
+      background: #e8bd68;
       clip-path: polygon(0 100%, 50% 48%, 100% 100%);
       z-index: 2;
     }
@@ -98,7 +110,7 @@
       width: 42px;
       height: 42px;
       border-radius: 50%;
-      background: #bd687b;
+      background: #d98c9d;
       color: white;
       display: flex;
       align-items: center;
@@ -120,14 +132,15 @@
     /* Letter */
     .letter {
       display: none;
-      background: rgba(255, 255, 255, 0.85);
-      border: 1px solid #f4d9dd;
+      background: rgba(255, 255, 250, 0.94);
+      border: 1px solid #f1dfa5;
       border-radius: 14px;
       padding: 28px 23px;
       text-align: left;
       line-height: 1.8;
-      box-shadow: 0 12px 35px rgba(130, 75, 85, 0.10);
+      box-shadow: 0 12px 35px rgba(130, 100, 65, 0.12);
       animation: appear 1s ease forwards;
+      position: relative;
     }
 
     .letter.show {
@@ -137,7 +150,7 @@
     .letter h2 {
       text-align: center;
       font-weight: normal;
-      color: #b66c7c;
+      color: #b78349;
       font-size: 23px;
       margin-top: 0;
       margin-bottom: 24px;
@@ -159,7 +172,8 @@
       display: none;
       margin-top: 22px;
       padding: 15px;
-      background: rgba(255,255,255,0.7);
+      background: rgba(255, 250, 225, 0.9);
+      border: 1px solid #f1dfa5;
       border-radius: 12px;
       font-size: 13px;
     }
@@ -170,17 +184,18 @@
 
     .music-button {
       border: none;
-      background: #d98c9d;
+      background: #d9a84f;
       color: white;
       border-radius: 25px;
       padding: 10px 20px;
       font-size: 14px;
       cursor: pointer;
       margin-top: 8px;
+      transition: background 0.3s ease;
     }
 
     .music-button:hover {
-      background: #c7798b;
+      background: #c58e38;
     }
 
     .footer {
@@ -188,29 +203,32 @@
       font-size: 12px;
       color: #b58c94;
     }
+
+    /* Floating stickers */
     .sticker-background {
-    position: fixed;
-    inset: 0;
-    overflow: hidden;
-    pointer-events: none;
-    z-index: 0;
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
     }
 
     .floating-sticker {
-        position: absolute;
-        width: var(--size);
-        opacity: 0.35;
-        animation: slideSticker var(--duration) linear infinite;
-        animation-delay: var(--delay);
+      position: absolute;
+      width: var(--size);
+      opacity: 0.32;
+      animation: slideSticker var(--duration) linear infinite;
+      animation-delay: var(--delay);
+      will-change: transform;
     }
 
     @keyframes slideSticker {
-        from {
-            transform: translateX(110vw) rotate(0deg);
-        }
-        to {
-            transform: translateX(-150px) rotate(360deg);
-        }
+      from {
+        transform: translateX(110vw) rotate(0deg);
+      }
+      to {
+        transform: translateX(-150px) rotate(360deg);
+      }
     }
 
     @keyframes appear {
@@ -242,12 +260,14 @@
         padding: 23px 18px;
       }
     }
+
   </style>
 </head>
 
 <body>
 
   <div class="sticker-background" id="stickerBackground"></div>
+
   <main class="container">
     <h1>For My Iwog ♡</h1>
     <p class="subtitle">A little something made just for you.</p>
@@ -355,13 +375,10 @@
       envelope.classList.add("open");
       tapHint.style.display = "none";
 
-      // Reveal the letter
       setTimeout(() => {
         document.getElementById("envelopeWrapper").style.display = "none";
         letter.classList.add("show");
         musicBox.classList.add("show");
-
-        // Attempt music playback from the envelope tap
         playMusic();
       }, 650);
     }
@@ -386,24 +403,26 @@
       playButton.textContent = "♫ Music is playing";
     });
 
+    /* Random floating stickers */
     const stickerImages = [
+      "stickers/iwog 1.png",
       "stickers/iwog 2.jfif",
-      "stickers/iwog 1.jfif",
-      "stickers/wacky-1.png",
-      "stickers/wacky-2.png",
-      "stickers/funny-1.png"
-  ];
+      "stickers/iwog 3.png",
+      "stickers/iwog 4.png",
+      "stickers/iwog 5.png"
+    ];
 
-  const background = document.getElementById("stickerBackground");
+    const background = document.getElementById("stickerBackground");
 
-  for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 10; i++) {
       const sticker = document.createElement("img");
 
       sticker.src = stickerImages[
-          Math.floor(Math.random() * stickerImages.length)
+        Math.floor(Math.random() * stickerImages.length)
       ];
 
       sticker.className = "floating-sticker";
+      sticker.alt = "";
 
       sticker.style.top = Math.random() * 90 + "%";
       sticker.style.setProperty("--size", (40 + Math.random() * 45) + "px");
@@ -411,7 +430,7 @@
       sticker.style.setProperty("--delay", (-Math.random() * 25) + "s");
 
       background.appendChild(sticker);
-  }
+    }
   </script>
 
 </body>
